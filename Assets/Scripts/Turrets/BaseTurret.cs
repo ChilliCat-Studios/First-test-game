@@ -22,9 +22,9 @@ public abstract class BaseTurret : MonoBehaviour
     [SerializeField]
     private float attackSpeed = 1f; //attacks per second
 
-    protected Transform target;
     private float timeUntilFire;
 
+    protected RaycastHit2D[] hits;
 
     private void OnDrawGizmosSelected()
     {
@@ -36,8 +36,11 @@ public abstract class BaseTurret : MonoBehaviour
     {
         timeUntilFire += Time.deltaTime;
 
-        
-        if (timeUntilFire >= 1f / attackSpeed)
+        //calc towers in range
+        hits = Physics2D.CircleCastAll(transform.position, targetingRange,
+            (Vector2)transform.position, 0f, enemyMask);
+
+        if (timeUntilFire >= 1f / attackSpeed && hits.Length > 0)
         {
             Attack();
             timeUntilFire = 0;

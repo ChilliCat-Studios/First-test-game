@@ -17,8 +17,8 @@ public abstract class TargetingTurret : BaseTurret
     [Foldout("Targeting")]
     [SerializeField]
     private float rotationSpeed = 300f;
-    
 
+    protected Transform target;
 
 
     private void OnDrawGizmosSelected()
@@ -65,9 +65,6 @@ public abstract class TargetingTurret : BaseTurret
     //rework to have targeting priority IE furthest enemy
     private void FindTarget()
     {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange,
-            (Vector2)transform.position, 0f, enemyMask);
-
         if (hits.Length > 0)
         {
             target = hits[0].transform;
