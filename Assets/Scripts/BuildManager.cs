@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BuildManager : MonoBehaviour
@@ -12,21 +13,25 @@ public class BuildManager : MonoBehaviour
     private Tower[] towers;
 
 
-    private int selectedTower = 0;
+    private Tower selectedTower;
 
 
     private void Awake()
     {
         main = this;
+        selectedTower = towers[0];
     }
 
     public Tower GetSelectedTower()
     {
-        return towers[selectedTower];
+        Debug.Log(selectedTower.name);
+        return selectedTower;
     }
 
-    public void SetSelectedTower(int selectedTower)
+    public void SetSelectedTower(GameObject selectedTower)
     {
-        this.selectedTower = selectedTower;
+        Tower tower = towers.First(c => c.prefab.Equals(selectedTower));
+        Debug.Log(tower.name);
+        this.selectedTower = tower;
     }
 }

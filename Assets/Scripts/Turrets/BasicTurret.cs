@@ -15,6 +15,7 @@ public class BasicTurret : TargetingTurret
 
     public override void Attack()
     {
+        if (target == null) return;
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
         bulletScript.SetTarget(target);

@@ -33,6 +33,7 @@ public abstract class TargetingTurret : BaseTurret
         {
             target = null;
         }
+
         base.Update();
 
 

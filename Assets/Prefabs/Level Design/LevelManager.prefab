@@ -55,12 +55,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   startPoint: {fileID: 0}
-  currency: 0
+  currency: 100
 --- !u!114 &7726985039190952234
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,7 +37,6 @@ public class Tile : MonoBehaviour
     private void OnMouseDown()
     {
         //prevent clicking tiles behind ui
-        Debug.Log(EventSystem.current);
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
         //in the futrue replacew wiht upgrade logic and sell logic

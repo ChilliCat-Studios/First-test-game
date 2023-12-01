@@ -32,7 +32,6 @@ public abstract class BaseTurret : MonoBehaviour
         Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
     }
 
-    // Update is called once per frame
     public virtual void Update()
     {
         timeUntilFire += Time.deltaTime;
