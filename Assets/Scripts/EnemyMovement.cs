@@ -13,11 +13,13 @@ public class EnemyMovement : MonoBehaviour
 
     private Transform target;
     private int pathIndex = 0;
+    private float baseSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         target = LevelManager.main.path[pathIndex];
+        baseSpeed = movespeed;
     }
 
     // Update is called once per frame
@@ -49,5 +51,15 @@ public class EnemyMovement : MonoBehaviour
         Vector2 dir = (target.position - transform.position).normalized;
 
         rb.velocity = dir * movespeed;
+    }
+
+    public void UpdateSpeed(float newSpeed)
+    {
+        movespeed = newSpeed;
+    }
+
+    public void ResetMoveSpeed()
+    {
+        movespeed = baseSpeed;
     }
 }

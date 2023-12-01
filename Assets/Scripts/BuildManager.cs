@@ -8,8 +8,8 @@ public class BuildManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField]
-    //replace with better list
-    private GameObject[] towerPrefabs;
+    
+    private Tower[] towers;
 
 
     private int selectedTower = 0;
@@ -20,8 +20,13 @@ public class BuildManager : MonoBehaviour
         main = this;
     }
 
-    public GameObject GetSelectedTower()
+    public Tower GetSelectedTower()
     {
-        return towerPrefabs[selectedTower];
+        return towers[selectedTower];
+    }
+
+    public void SetSelectedTower(int selectedTower)
+    {
+        this.selectedTower = selectedTower;
     }
 }

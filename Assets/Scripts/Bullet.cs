@@ -14,6 +14,12 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private int bulletDmg = 1;
 
+    public float TimeToLive = 5f;
+    private void Start()
+    {
+        Destroy(gameObject, TimeToLive);
+    }
+
     private Transform target;
 
     private void FixedUpdate()
