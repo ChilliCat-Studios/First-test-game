@@ -1,29 +1,36 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Refereences")]
-    [SerializeField] public GameObject[] enemyPrefabs;
+    [Header("References")]
+    [SerializeField] public Wave[] waves;
+
+
 
     [Header("Attributes")]
-    [SerializeField] private int baseEnemies = 8;
-    [SerializeField] private float enemiesPerSecond = 0.5f;
     [SerializeField] private float timeBetweenWaves = 5f;
-    [SerializeField] private float difficultyScalingFactor = 0.75f;
 
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
 
 
-    private int currentWave = 1;
-    private float timeSinceLastSpawn;
+    private Dictionary<GUID, float> infoGuidToTimeSinceLastSpawn = new Dictionary<GUID, float>();
     private int enemiesAlive;
-    private int enemiesToSpawn;
     private bool isSpawning = false;
+
+    private int currentWaveIndex = 0;
+    private Wave currentWave;
+    private WaveInfo[] currentWaveInfo;
+    private int currentWaveInfoNumber;
+
+    private float waveTimer = 0;
+
 
     #region unity methods
 
@@ -34,6 +41,10 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        currentWave = waves.First(wave => wave.waveIndex == currentWaveIndex);
+        currentWaveInfoNumber = 0;
+        currentWaveInfo = currentWave.waveInfo.Where(info => info.waveOrderNumber == currentWaveInfoNumber).ToArray();
+        BuildNewTimeMap();
         StartCoroutine(StartWave());
     }
 
@@ -41,32 +52,70 @@ public class EnemySpawner : MonoBehaviour
     {
         if(!isSpawning) return;
 
-
-        if (enemiesToSpawn > 0)
+        foreach(WaveInfo info in currentWaveInfo)
         {
-            timeSinceLastSpawn += Time.deltaTime;
-            if (timeSinceLastSpawn >= 1f / enemiesPerSecond)
+            if(info.numEnemies > 0)
             {
-                SpawnEnemy();
-                enemiesToSpawn--;
-                enemiesAlive++;
-                timeSinceLastSpawn = 0f;
+                infoGuidToTimeSinceLastSpawn[info.guid] += Time.deltaTime;
+                if(infoGuidToTimeSinceLastSpawn[info.guid] >= info.getEnemySpawnRate())
+                {
+                    SpawnEnemy(info);
+                    infoGuidToTimeSinceLastSpawn[info.guid] = 0;
+                }
             }
         }
-        else if(enemiesAlive == 0)
+        
+        if(currentWaveInfo.Where(info => info.numEnemies > 0).Count() == 0)
         {
-            EndWave();
+            if(IsNextWavePart())
+            {
+                waveTimer += Time.deltaTime;
+                WaveInfo[] infoSet = currentWaveInfo.Where(info => info.timeToNextWavePart > 0).ToArray();
+                if (infoSet.Length > 0 && waveTimer > infoSet[0].timeToNextWavePart)
+                {
+                    waveTimer = 0;
+                    currentWaveInfoNumber++;
+                    currentWaveInfo = currentWave.waveInfo.Where(info => info.waveOrderNumber == currentWaveInfoNumber).ToArray();
+                    BuildNewTimeMap();
+                }
+            }
+            else if (enemiesAlive == 0)
+            {
+                EndWave();
+            }
         }
     }
 
     #endregion
 
+    private bool IsNextWavePart()
+    {
+        WaveInfo[] newInfo = currentWave.waveInfo.Where(info => info.waveOrderNumber == currentWaveInfoNumber + 1).ToArray();
+        return newInfo.Count() != 0;
+    }
+
     private void EndWave()
     {
         isSpawning = false;
-        timeSinceLastSpawn = 0f;
-        currentWave++;
+        currentWaveIndex++;
+        currentWave = waves.Where(wave => wave.waveIndex == currentWaveIndex).FirstOrDefault();
+        if (currentWave == null) {
+            //level over, win, add logic
+            return;
+        }
+        currentWaveInfoNumber = 0;
+        currentWaveInfo = currentWave.waveInfo.Where(info => info.waveOrderNumber == currentWaveInfoNumber).ToArray();
+        BuildNewTimeMap();
         StartCoroutine(StartWave());
+    }
+
+    private void BuildNewTimeMap()
+    {
+        infoGuidToTimeSinceLastSpawn.Clear();
+        foreach(WaveInfo info in currentWaveInfo) {
+            info.guid = GUID.Generate();
+            infoGuidToTimeSinceLastSpawn.Add(info.guid, 0);
+        }
     }
 
     private void EnemyDestroyed()
@@ -74,11 +123,11 @@ public class EnemySpawner : MonoBehaviour
         enemiesAlive--;
     }
 
-    //want to rework where we can hard define waves instead of spawning randomly
-    private void SpawnEnemy()
+    private void SpawnEnemy(WaveInfo info)
     {
-        GameObject prefabToSpawn = enemyPrefabs[0];
-        Instantiate(prefabToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
+        Instantiate(info.prefab, LevelManager.main.startPoint.position, Quaternion.identity);
+        info.numEnemies--;
+        enemiesAlive++;
     }
 
     
@@ -87,13 +136,6 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(timeBetweenWaves);
         isSpawning = true;
-        enemiesToSpawn = EnemiesPerWave();
-    }
-
-
-    private int EnemiesPerWave()
-    {
-        return Mathf.RoundToInt(baseEnemies * Mathf.Pow(currentWave, difficultyScalingFactor));
     }
 
 }
