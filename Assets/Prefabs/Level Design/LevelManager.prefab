@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9077627867561520687}
   - component: {fileID: 2194747996910795970}
   - component: {fileID: 1801487261742574800}
+  - component: {fileID: 3486884185990114789}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -83,6 +84,18 @@ MonoBehaviour:
   - name: Ice Turret
     cost: 30
     prefab: {fileID: 8018703760490063297, guid: f7b0426a165841a43b9c6c1bc8ac98f2, type: 3}
+--- !u!114 &3486884185990114789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5693116275285529122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22aa3fe9fc9a1e4458c86541c40e81c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1412824175621700107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,6 +147,34 @@ PrefabInstance:
     - target: {fileID: 3866223694553217339, guid: 0ab8afcf297a73c429845f019fa8539c, type: 3}
       propertyPath: m_Name
       value: TestLevel - WaveManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687352905265449459, guid: 0ab8afcf297a73c429845f019fa8539c, type: 3}
+      propertyPath: waves.Array.data[2].waveInfo.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687352905265449459, guid: 0ab8afcf297a73c429845f019fa8539c, type: 3}
+      propertyPath: waves.Array.data[0].waveInfo.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 2997000649170892362, guid: 5990394df1e1a054aab94b047236fdde, type: 3}
+    - target: {fileID: 7687352905265449459, guid: 0ab8afcf297a73c429845f019fa8539c, type: 3}
+      propertyPath: waves.Array.data[2].waveInfo.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 2997000649170892362, guid: 1555cb6f6d12c1648ad77b0f0cdf9dbf, type: 3}
+    - target: {fileID: 7687352905265449459, guid: 0ab8afcf297a73c429845f019fa8539c, type: 3}
+      propertyPath: waves.Array.data[2].waveInfo.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 2997000649170892362, guid: 1555cb6f6d12c1648ad77b0f0cdf9dbf, type: 3}
+    - target: {fileID: 7687352905265449459, guid: 0ab8afcf297a73c429845f019fa8539c, type: 3}
+      propertyPath: waves.Array.data[2].waveInfo.Array.data[1].numEnemies
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687352905265449459, guid: 0ab8afcf297a73c429845f019fa8539c, type: 3}
+      propertyPath: waves.Array.data[2].waveInfo.Array.data[0].enemiesPerSecond
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7687352905265449459, guid: 0ab8afcf297a73c429845f019fa8539c, type: 3}
+      propertyPath: waves.Array.data[2].waveInfo.Array.data[1].enemiesPerSecond
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

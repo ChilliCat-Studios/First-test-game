@@ -12,8 +12,9 @@ public class Tile : MonoBehaviour
     private Color hoverColor;
 
 
-    private GameObject tower;
+    private GameObject towerObj;
     private Color startColor;
+    public BasicTurret turret1;
 
 
     private void Start()
@@ -36,12 +37,18 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if(UImanager.main.IsHoveringUI()) return; //Katz :)
+
+
         //prevent clicking tiles behind ui
         if (EventSystem.current.IsPointerOverGameObject()) return;
 
         //in the futrue replacew wiht upgrade logic and sell logic
-        if (tower != null) return;
-
+        if (towerObj != null)
+        {
+            turret1.OpenUpgradeUI();
+            return;
+        }
         Tower towerToBuild = BuildManager.main.GetSelectedTower();
 
         if (towerToBuild.cost > LevelManager.main.currency) {
@@ -50,7 +57,7 @@ public class Tile : MonoBehaviour
         }
 
         LevelManager.main.SpendCurrency(towerToBuild.cost);
-        tower = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
-
+        towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
+        turret1 = towerObj.GetComponent<BasicTurret>();
     }
 }

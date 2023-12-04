@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 535688210675650323}
   - component: {fileID: 7687352905265449459}
+  - component: {fileID: 4681881405044698872}
   m_Layer: 0
   m_Name: TestLevel - WaveManager
   m_TagString: Untagged
@@ -39,6 +40,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3866223694553217339}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874fd5bc8e444884192e2c9756ecdf58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyPrefabs:
+  - {fileID: 2997000649170892362, guid: 5990394df1e1a054aab94b047236fdde, type: 3}
+  - {fileID: 2997000649170892362, guid: 5990394df1e1a054aab94b047236fdde, type: 3}
+  - {fileID: 2997000649170892362, guid: 1555cb6f6d12c1648ad77b0f0cdf9dbf, type: 3}
+  BaseAmountOfEnemies: 2
+  EnemiesPerSecond: 0.5
+  TimeOutPerWave: 1
+  DifficultyLevelIncrease: 0.5
+--- !u!114 &4681881405044698872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3866223694553217339}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f41040f28af6174582402ee06c4be16, type: 3}
@@ -46,38 +67,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - waveIndex: 0
-    waveName: First Wave
-    waveDescription: This one should be easy.
+    waveName: 
+    waveDescription: 
     waveInfo:
     - prefab: {fileID: 2997000649170892362, guid: 5990394df1e1a054aab94b047236fdde, type: 3}
-      numEnemies: 8
+      numEnemies: 2
       waveOrderNumber: 0
-      timeToNextWavePart: 3
-      enemiesPerSecond: 0.5
-    - prefab: {fileID: 2997000649170892362, guid: 5990394df1e1a054aab94b047236fdde, type: 3}
-      numEnemies: 8
-      waveOrderNumber: 1
       timeToNextWavePart: 0
-      enemiesPerSecond: 1
+      enemiesPerSecond: 2
   - waveIndex: 1
-    waveName: Second Wave
-    waveDescription: What if we add more?
+    waveName: 
+    waveDescription: 
     waveInfo:
     - prefab: {fileID: 2997000649170892362, guid: 5990394df1e1a054aab94b047236fdde, type: 3}
-      numEnemies: 16
+      numEnemies: 2
       waveOrderNumber: 0
-      timeToNextWavePart: 3
-      enemiesPerSecond: 0.5
-    - prefab: {fileID: 2997000649170892362, guid: 5990394df1e1a054aab94b047236fdde, type: 3}
-      numEnemies: 16
-      waveOrderNumber: 1
       timeToNextWavePart: 0
-      enemiesPerSecond: 1
+      enemiesPerSecond: 2
   - waveIndex: 2
-    waveName: Third Wave
-    waveDescription: How about we make em come faster?
+    waveName: 
+    waveDescription: 
     waveInfo:
-    - prefab: {fileID: 2997000649170892362, guid: 5990394df1e1a054aab94b047236fdde, type: 3}
+    - prefab: {fileID: 2997000649170892362, guid: 1555cb6f6d12c1648ad77b0f0cdf9dbf, type: 3}
       numEnemies: 32
       waveOrderNumber: 0
       timeToNextWavePart: 0
