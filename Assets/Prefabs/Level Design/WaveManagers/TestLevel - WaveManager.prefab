@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3866223694553217339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 535688210675650323}
+  - component: {fileID: 7687352905265449459}
+  m_Layer: 0
+  m_Name: TestLevel - WaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &535688210675650323
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3866223694553217339}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.47561786, y: 0.28639346, z: 8.976025}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7687352905265449459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3866223694553217339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f41040f28af6174582402ee06c4be16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - waveIndex: 0
+    waveName: First Wave
+    waveDescription: This one should be easy.
+    waveInfo:
+    - prefab: {fileID: 2997000649170892362, guid: 5990394df1e1a054aab94b047236fdde, type: 3}
+      numEnemies: 8
+      waveOrderNumber: 0
+      timeToNextWavePart: 3
+      enemiesPerSecond: 0.5
+    - prefab: {fileID: 2997000649170892362, guid: 5990394df1e1a054aab94b047236fdde, type: 3}
+      numEnemies: 8
+      waveOrderNumber: 1
+      timeToNextWavePart: 0
+      enemiesPerSecond: 1
+  - waveIndex: 1
+    waveName: Second Wave
+    waveDescription: What if we add more?
+    waveInfo:
+    - prefab: {fileID: 2997000649170892362, guid: 5990394df1e1a054aab94b047236fdde, type: 3}
+      numEnemies: 16
+      waveOrderNumber: 0
+      timeToNextWavePart: 3
+      enemiesPerSecond: 0.5
+    - prefab: {fileID: 2997000649170892362, guid: 5990394df1e1a054aab94b047236fdde, type: 3}
+      numEnemies: 16
+      waveOrderNumber: 1
+      timeToNextWavePart: 0
+      enemiesPerSecond: 1
+  - waveIndex: 2
+    waveName: Third Wave
+    waveDescription: How about we make em come faster?
+    waveInfo:
+    - prefab: {fileID: 2997000649170892362, guid: 5990394df1e1a054aab94b047236fdde, type: 3}
+      numEnemies: 32
+      waveOrderNumber: 0
+      timeToNextWavePart: 0
+      enemiesPerSecond: 2
+  timeBetweenWaves: 5
