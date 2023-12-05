@@ -14,7 +14,7 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] private int BaseAmountOfEnemies = 2;
     [SerializeField] private float EnemiesPerSecond = 0.5f;
     [SerializeField] private float TimeOutPerWave = 1f;
-    [SerializeField] private float DifficultyLevelIncrease = 0.5f;
+    [SerializeField] private float DifficultyLevelIncrease = 2f;
 
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
@@ -85,7 +85,7 @@ public class EnemySpawn : MonoBehaviour
 
     private int EnemiesPerWave()
     {
-        return Mathf.RoundToInt(BaseAmountOfEnemies * Mathf.Pow(CurrentWave, DifficultyLevelIncrease));
+        return Mathf.RoundToInt(BaseAmountOfEnemies * (Mathf.Pow(CurrentWave, DifficultyLevelIncrease)));
     }
 
 }

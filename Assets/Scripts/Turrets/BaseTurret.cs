@@ -20,7 +20,8 @@ public abstract class BaseTurret : MonoBehaviour
     protected float targetingRange = 3f;
     [Foldout("Base")]
     [SerializeField]
-    private float attackSpeed = 1f; //attacks per second
+    protected float attackSpeed = 1f; //attacks per second
+    [SerializeField] protected int BaseUpgradeCost = 60;
 
     private float timeUntilFire;
 
