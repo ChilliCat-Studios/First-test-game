@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class BasicTurret : TargetingTurret
 {
@@ -16,8 +17,13 @@ public class BasicTurret : TargetingTurret
     [SerializeField] private Button upgradeButton;
 
     private int lvl = 1;
-    
-    
+    BasicTurret BasTurret;
+
+    private void Start()
+    {
+        upgradeButton.onClick.AddListener(UpgradeBasicTurret);
+    }
+
 
     public override void Attack()
     {
@@ -35,10 +41,26 @@ public class BasicTurret : TargetingTurret
     public void CloseUpgradeUI()
     {
         upgradeUI.SetActive(false);
+        UImanager.main.SetHoveringState(false);
     }
 
     public void UpgradeBasicTurret()
     {
+        if(BaseUpgradeCost > LevelManager.main.currency) return;
+
+        LevelManager.main.SpendCurrency(BaseUpgradeCost);
+        
+        targetingRange++;
+        attackSpeed++;
+        lvl++;
+
+        CloseUpgradeUI();
+
+        Debug.Log("New TargetInRange: "+ targetingRange);
+        Debug.Log("New level: "+ lvl);
+        Debug.Log("New atck: " + attackSpeed);
+        //CloseUpgradeUI();
+
 
     }
 }
